@@ -3,7 +3,7 @@
 A UNLV-based geolocator, leveraging machine learning algorithms and dynamic learning. 
 Image recognition and coordinate-based supervised learning were implemented to predict input images from a self-captured, 6,000+ photo dataset.
 
-**[Demo](https://docs.google.com/presentation/d/1KvvYFAokP8HvaATkJNQrT9pRTmb60Vqf/edit?rtpof=true&sd=true)** &nbsp; **[Report](https://docs.google.com/presentation/d/1KvvYFAokP8HvaATkJNQrT9pRTmb60Vqf/edit?rtpof=true&sd=true)**
+**[Demo](https://docs.google.com/presentation/d/1KvvYFAokP8HvaATkJNQrT9pRTmb60Vqf/edit?rtpof=true&sd=true)** &nbsp; **[Report](https://docs.google.com/document/d/17bAR715s4y0F84yz48RcYhYhvDnf9tYT5Q50nIaxMR4/edit?usp=sharing)**
 
 
 
