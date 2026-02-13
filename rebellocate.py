@@ -40,6 +40,7 @@ def extract_metadata(path):
 
 
 # CHANGE THESE WHEN RUNNING PROGRAM
+# TODO: Make these .env
 PARENT_DIRECTORY = ""
 PREDICTED_IMAGE = ""
 
