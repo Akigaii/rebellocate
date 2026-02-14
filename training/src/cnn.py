@@ -10,7 +10,7 @@ import pandas as pd
 from exif import Image
 from PIL import Image as PILImage
 
-from sklearn import preprocessing, neighbors, datasets
+from sklearn import preprocessing, datasets
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score
@@ -22,7 +22,7 @@ from torch.nn import functional
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader, Dataset, random_split
 
-def cnn():
+def cnn(predictedLabel, possibleAreas, PARENT_DIRECTORY, PREDICTED_IMAGE):
 
     # Image transformations that will be applied to all.
     transform = transforms.Compose([
@@ -76,7 +76,8 @@ def cnn():
     # Train the last layer of the model, hyperparameters being adjusted.
     print("\nUtilizing CNN to determine room label(s)...")
     model.train()
-    for epoch in range(10):
+    for epoch in range(1):
+    # for epoch in range(10):
         print('Epoch', epoch + 1)
 
         # Go through every image in directory.
@@ -133,3 +134,5 @@ def cnn():
         logit = model(img_tensor)
         scores = functional.softmax(logit, dim = 1).data.squeeze()
         probs, index = scores.sort(0, True)
+
+    return predictedLabel, classes, probs, index

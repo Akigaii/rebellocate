@@ -10,7 +10,7 @@ import pandas as pd
 from exif import Image
 from PIL import Image as PILImage
 
-from sklearn import preprocessing, neighbors, datasets
+from sklearn import neighbors as kneighbors
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import accuracy_score
@@ -24,7 +24,7 @@ from torch.utils.data import DataLoader, Dataset, random_split
 
 
 
-def knn(df):
+def knn(df, img_name, img_label, img_bulding, oneHotDict, PARENT_DIRECTORY, PREDICTED_IMAGE):
     # Randomize to create distributed labels. (More accurate training).
     np.random.shuffle(df)
     np.random.seed(1)
@@ -52,7 +52,7 @@ def knn(df):
             X_train, X_test = coords[train_index], coords[test_index]
             y_train, y_test = building_names[train_index], building_names[test_index]
 
-            knn = neighbors.KNeighborsClassifier(n_neighbors=k, weights='distance', metric='euclidean')
+            knn = kneighbors.KNeighborsClassifier(n_neighbors=k, weights='distance', metric='euclidean')
             knn.fit(X_train, y_train)
 
             # Attain accuracy for each fold.
@@ -71,7 +71,7 @@ def knn(df):
 
     # Print and apply the found best K value.
     print(f"     - Finished! Best k: {bestk} with accuracy {bestscore * 100:.4f}%")
-    knn = neighbors.KNeighborsClassifier(n_neighbors=bestk, weights='distance', metric='euclidean')
+    knn = kneighbors.KNeighborsClassifier(n_neighbors=bestk, weights='distance', metric='euclidean')
     knn.fit(coords, building_names)
 
     # Extract coordinates from this image.
@@ -106,6 +106,17 @@ def knn(df):
 
         # Update count for each beighbor appearance.
         neighbors[decodedLabel] += 1
+
+    # Scan the existing building directory to see its possible room labels.
+    possibleAreas = []
+    for labels in os.listdir(PARENT_DIRECTORY + "/" + predictedLabel):
+        if labels == '.DS_Store':
+            continue
+        possibleAreas.append(labels)
+    print("     - Finished!")
+
+    return predictedBuildingDirectory, predictedLabel, possibleAreas, img_lat, img_lon, bestk, neighbors
+
 
 
 def extract_metadata(path):

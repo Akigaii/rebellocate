@@ -7,7 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 
 def exif(PARENT_DIRECTORY, PREDICTED_IMAGE):
     # Parse components from predicted image directory.
-    parts = PREDICTED_IMAGE.split("/")
+    parts = PREDICTED_IMAGE.split("\\")
     img_name = parts[len(parts) - 1]
     img_building = parts[len(parts) - 2]
     img_label = parts[len(parts) - 3]
@@ -85,7 +85,7 @@ def exif(PARENT_DIRECTORY, PREDICTED_IMAGE):
     plt.show()
     print(f"     - Finished! Check terminal for scatter plot.")
 
-    return df
+    return df, img_name, img_label, img_building, oneHotDict
 
 
 def extract_metadata(path):

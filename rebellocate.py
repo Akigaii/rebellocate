@@ -41,11 +41,11 @@ def extract_metadata(path):
 
 # CHANGE THESE WHEN RUNNING PROGRAM
 # TODO: Make these .env
-PARENT_DIRECTORY = ""
-PREDICTED_IMAGE = ""
+PARENT_DIRECTORY = "c:\\Users\\aigaui\\Desktop\\rebellocate"
+PREDICTED_IMAGE = "c:\\Users\\aigaui\\Desktop\\rebellocate\\BEH\\corridor\\IMG_4759.JPG"
 
 # Parse components from predicted image directory.
-parts = PREDICTED_IMAGE.split("/")
+parts = PREDICTED_IMAGE.split("\\")
 img_name = parts[len(parts) - 1]
 img_building = parts[len(parts) - 2]
 img_label = parts[len(parts) - 3]
@@ -203,7 +203,7 @@ for i, idx in enumerate(indices[0]):
     if decodedLabel not in neighbors:
         neighbors[decodedLabel] = 0
 
-    # Update count for each beighbor appearance.
+    # Update count for each neighbor appearance.
     neighbors[decodedLabel] += 1
 
 # Scan the existing building directory to see its possible room labels.
